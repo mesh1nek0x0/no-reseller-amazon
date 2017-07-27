@@ -1,0 +1,29 @@
+{
+  "name": "lambda-ghost",
+  "version": "1.0.0",
+  "description": "phantomjs sample in lambda by node-lambda",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mesh1neko/lambda-ghost.git"
+  },
+  "keywords": [
+    "phantom",
+    "aws-lambda"
+  ],
+  "author": "mesh1nek0x0",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mesh1neko/lambda-ghost/issues"
+  },
+  "homepage": "https://github.com/mesh1neko/lambda-ghost#readme",
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "node-lambda": "^0.11.3",
+    "phantom": "^4.0.5",
+    "sleep-promise": "^2.0.0"
+  }
+}
