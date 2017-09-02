@@ -4,10 +4,10 @@
   "description": "phantomjs sample in lambda by node-lambda",
   "main": "index.js",
   "scripts": {
-    "setup": "$(npm bin)/node-lambda setup",
-    "invoke": "$(npm bin)/node-lambda run",
-    "package": "$(npm bin)/node-lambda package",
-    "deploy": "$(npm bin)/node-lambda deploy",
+    "setup": "node-lambda setup",
+    "start": "node-lambda run",
+    "package": "node-lambda package",
+    "deploy": "node-lambda deploy -f deploy.env",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
