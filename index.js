@@ -17,7 +17,7 @@ function *processEvent(event, context, callback) {
         instance = yield phantom.create();
         const page = yield instance.createPage();
 
-        let status = yield page.open('https://httpbin.org/');
+        let status = yield page.open(process.env.TARGET_ITEM_LINK);
         console.log(status);
         if (status != 'success') {
             throw new Error('page is not opend');
@@ -31,33 +31,11 @@ function *processEvent(event, context, callback) {
 
         /*** you can pass node js variable to evaluating by Template Literals.
         (notice) coulud't pass normal variable. ***/
-        let child = 2;
-        const ipLink = yield page.evaluate(function(s) {
-            return document.querySelector(s).innerHTML;
-        }, `#manpage > div.mp > ul:nth-child(6) > li:nth-child(${child})`);
-        console.log(ipLink);
-
-
-        /*** you can post data with form. ***/
-        status = yield page.open('https://httpbin.org/forms/post');
-        console.log(status);
-        if (status != 'success') {
-            throw new Error('page is not opend');
-        }
-        console.log('input custname "hoge"');
-        yield page.evaluate(function() {
-            document.forms[0].custname.value = 'hoge';
-            document.querySelector('body > form > p:nth-child(8) > button').click();
-            // you can also like beloow
-            // document.forms[0].submit();
-        });
-        // wait 2sec
-        yield sleep(2000);
-        // it can be accessd
-        const custname = yield page.evaluate(function () {
-            return JSON.parse(document.querySelector('body > pre').innerHTML).form.custname;
-        });
-        console.log('your custname:', custname);
+        let element = '#merchant-info > a';
+        const seller = yield page.evaluate(function(s) {
+            return document.querySelector(s).text;
+        }, `${element}`);
+        console.log(seller);
 
 
     })().then(() => {
