@@ -1,5 +1,7 @@
 'use strict';
 
+const aws = require('aws-sdk');
+const lambda = new aws.Lambda({region: 'us-east-1'});
 const Promise = require('bluebird');
 const phantom = require('phantom');
 const sleep = require('sleep-promise');
@@ -36,6 +38,23 @@ function *processEvent(event, context, callback) {
             return document.querySelector(s).text;
         }, `${element}`);
         console.log(seller);
+
+        if (seller === "Amazon.co.jp") {
+            var message = {
+                channel: process.env.SLACK_CHANNEL,
+                message: `<${process.env.TARGET_ITEM_LINK}|Amazonのイカ>が入荷されたよ!!!`
+            };
+            var awParam = {
+                FunctionName: "notify-slack",
+                InvokeArgs: JSON.stringify(message),
+            };
+            lambda.invokeAsync(awParam, function(err, data) {
+                if(err) {
+                    console.log('invoke notify-slack is fail');
+                    throw err;
+                }
+            });
+        }
 
 
     })().then(() => {
