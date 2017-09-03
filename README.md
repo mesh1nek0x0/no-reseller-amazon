@@ -14,6 +14,10 @@ $ sed -i '' 's/\(TARGET_ITEM_LINK=\).*/\1"<your_target_item_link>"/' deploy.env
 
 ### edit SLACK_CHANNEL in deploy.env
 $ sed -i '' 's/\(SLACK_CHANNEL=\).*/\1"<your_slack_channel>"/' deploy.env
+
+### if you change notify message, edit NOTIFY_MESSAGE in deploy.env
+$ sed -i '' 's/\(NOTIFY_MESSAGE=\).*/\1"<your_notify_message>"/' deploy.env
+
 ```
 
 ## how to run

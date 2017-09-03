@@ -42,7 +42,7 @@ function *processEvent(event, context, callback) {
         if (seller === "Amazon.co.jp") {
             var message = {
                 channel: process.env.SLACK_CHANNEL,
-                message: `<${process.env.TARGET_ITEM_LINK}|Amazonのイカ>が入荷されたよ!!!`
+                message: `<${process.env.TARGET_ITEM_LINK}|${process.env.NOTIFY_MESSAGE}>`
             };
             var awParam = {
                 FunctionName: "notify-slack",
