@@ -49,7 +49,15 @@ function *processEvent(event, context, callback) {
         if (seller === "Amazon.co.jp" || numeral(price.split(' ')[1]).value() < process.env.TARGET_ITEM_PRICE_MAX) {
             var message = {
                 channel: process.env.SLACK_CHANNEL,
-                message: `<${process.env.TARGET_ITEM_LINK}|${process.env.NOTIFY_MESSAGE}>`
+                emoji: process.env.SLACK_EMOJI,
+                message: `<${process.env.TARGET_ITEM_LINK}|${process.env.NOTIFY_MESSAGE}>`,
+                attachments: [{
+                    color: 'good',
+                    fields: [
+                        {'title': 'seller', 'value': seller},
+                        {'title': 'price', 'value': price}
+                    ]
+                }]
             };
             var awParam = {
                 FunctionName: "notify-slack",
