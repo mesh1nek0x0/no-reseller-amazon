@@ -5,6 +5,7 @@ const lambda = new aws.Lambda({region: 'us-east-1'});
 const Promise = require('bluebird');
 const phantom = require('phantom');
 const sleep = require('sleep-promise');
+const numeral = require('numeral');
 
 module.exports.handler = (event, context, callback) => {
     return Promise.coroutine(processEvent)(event, context, callback);
@@ -39,7 +40,13 @@ function *processEvent(event, context, callback) {
         }, `${element}`);
         console.log(seller);
 
-        if (seller === "Amazon.co.jp") {
+        element = '#priceblock_ourprice';
+        const price = yield page.evaluate(function(s) {
+            return document.querySelector(s).innerHTML;
+        }, `${element}`);
+        console.log(price.split(' ')[1]);
+
+        if (seller === "Amazon.co.jp" || numeral(price.split(' ')[1]).value() < process.env.TARGET_ITEM_PRICE_MAX) {
             var message = {
                 channel: process.env.SLACK_CHANNEL,
                 message: `<${process.env.TARGET_ITEM_LINK}|${process.env.NOTIFY_MESSAGE}>`

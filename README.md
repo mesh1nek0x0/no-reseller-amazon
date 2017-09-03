@@ -9,8 +9,11 @@ $ yarn setup
 ### edit AWS_FUNCTION_NAME in .env
 $ sed -i '' 's/\(AWS_FUNCTION_NAME=\).*/\1"<your_lambda_name>"/' deploy.env
 
-### edit TARGET_ITEM_LINK in deploy.env
+### edit TARGET_ITEM_LINK which you want in deploy.env
 $ sed -i '' 's/\(TARGET_ITEM_LINK=\).*/\1"<your_target_item_link>"/' deploy.env
+
+### edit TARGET_ITEM_PRICE_MAX in deploy.env
+$ sed -i '' 's/\(TARGET_ITEM_PRICE_MAX=\).*/\1"<your_target_item_max_price>"/' deploy.env
 
 ### edit SLACK_CHANNEL in deploy.env
 $ sed -i '' 's/\(SLACK_CHANNEL=\).*/\1"<your_slack_channel>"/' deploy.env
