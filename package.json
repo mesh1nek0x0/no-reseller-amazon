@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "setup": "node-lambda setup",
-    "start": "node-lambda run",
+    "start": "node-lambda run -f deploy.env",
     "package": "node-lambda package",
     "deploy": "node-lambda deploy -f deploy.env",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -29,5 +29,8 @@
     "node-lambda": "^0.11.3",
     "phantom": "^4.0.5",
     "sleep-promise": "^2.0.0"
+  },
+  "devDependencies": {
+    "aws-sdk": "^2.108.0"
   }
 }
