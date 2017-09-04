@@ -19,6 +19,10 @@ function *processEvent(event, context, callback) {
     Promise.coroutine(function* () {
         instance = yield phantom.create();
         const page = yield instance.createPage();
+        page.setting(
+            'userAgent',
+            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.101 Safari/537.36'
+        );
 
         let status = yield page.open(process.env.TARGET_ITEM_LINK);
         console.log(status);
